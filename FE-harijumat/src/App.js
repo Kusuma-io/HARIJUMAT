@@ -9,12 +9,11 @@ import Login from "./Components/Login/Login";
 import Regist from "./Components/Regist/Regist";
 import Footer from "./Components/Footer/Footer";
 
-
 function App() {
   return (
     <>
       <Navbar />
-      <br/>
+      <br />
       <div className="container mt-5">
         <Routes>
           <Route path="/" element={<Dashboard />} />
