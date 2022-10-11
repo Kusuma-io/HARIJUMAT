@@ -1,8 +1,26 @@
 import React from "react";
+import Axios from "axios";
+import { useState } from "react";
 import "./Regist.css";
 import signup from "../../Image/signup.jpg";
 
 function Regist(props) {
+  const [firstNameReg, setFirstNameReg] = useState("");
+  const [lastNameReg, setLastNameReg] = useState("");
+  const [emailReg, setEmailReg] = useState("");
+  const [passwordReg, setPasswordReg] = useState("");
+
+  const register = () => {
+    Axios.post("http://localhost:8080/regist", {
+      firstName: firstNameReg,
+      lastName: lastNameReg,
+      email: emailReg,
+      password: passwordReg,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
   return (
     <>
       <div className="container">
@@ -15,19 +33,51 @@ function Regist(props) {
               <h1 className="text-center fw-bold">Sign Up</h1>
               <form className="p-4 p-md-5 border rounded-3 bg-dark">
                 <div className="form-floating mb-3">
-                  <input type="fname" className="form-control" id="floatingPassword" placeholder="First Name" />
+                  <input
+                    type="fname"
+                    className="form-control"
+                    id="floatingPassword"
+                    placeholder="First Name"
+                    onChange={(e) => {
+                      setFirstNameReg(e.target.value);
+                    }}
+                  />
                   <label for="floatingfname">First Name</label>
                 </div>
                 <div className="form-floating mb-3">
-                  <input type="lname" className="form-control" id="floatinglname" placeholder="Last Name" />
+                  <input
+                    type="lname"
+                    className="form-control"
+                    id="floatinglname"
+                    placeholder="Last Name"
+                    onChange={(e) => {
+                      setLastNameReg(e.target.value);
+                    }}
+                  />
                   <label for="floatinglname">Last Name</label>
                 </div>
                 <div className="form-floating mb-3">
-                  <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="floatingInput"
+                    placeholder="name@example.com"
+                    onChange={(e) => {
+                      setEmailReg(e.target.value);
+                    }}
+                  />
                   <label for="floatingInput">Email address</label>
                 </div>
                 <div className="form-floating mb-3">
-                  <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="floatingPassword"
+                    placeholder="Password"
+                    onChange={(e) => {
+                      setPasswordReg(e.target.value);
+                    }}
+                  />
                   <label for="floatingPassword">Password</label>
                 </div>
                 <div className="checkbox mb-3 text-white">
@@ -35,7 +85,11 @@ function Regist(props) {
                     <input type="checkbox" value="remember-me" /> Remember me
                   </label>
                 </div>
-                <button className="w-100 btn btn-lg btn-outline-success" type="submit">
+                <button
+                  className="w-100 btn btn-lg btn-outline-success"
+                  type="submit"
+                  onClick={register}
+                >
                   Sign Up
                 </button>
                 <hr className="my-1" />
